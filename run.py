@@ -4,6 +4,7 @@ __version__ = "2.0.0"
 __license__ = "MIT"
 
 import os
+os.environ["CUDA_VISIBLE_DEVICES"] = "-1"
 import json
 import time
 import math
@@ -36,7 +37,6 @@ def plot_results_multiple(predicted_data, true_data, prediction_len):
 def main():
     configs = json.load(open('config.json', 'r'))
     if not os.path.exists(configs['model']['save_dir']): os.makedirs(configs['model']['save_dir'])
-
     data = DataLoader(
         os.path.join('data', configs['data']['filename']),
         configs['data']['train_test_split'],
@@ -78,13 +78,11 @@ def main():
         seq_len=configs['data']['sequence_length'],
         normalise=configs['data']['normalise']
     )
-
-    predictions = model.predict_sequences_multiple(x_test, configs['data']['sequence_length'], configs['data']['sequence_length'])
-    # predictions = model.predict_sequence_full(x_test, configs['data']['sequence_length'])
-    # predictions = model.predict_point_by_point(x_test)
-
-    plot_results_multiple(predictions, y_test, configs['data']['sequence_length'])
-    # plot_results(predictions, y_test)
+    
+    # predictions = model.predict_sequences_multiple(x_test, configs['data']['sequence_length'], configs['data']['sequence_length'])
+    predictions=model.predict_sequence_full(x_test,configs['data']['sequence_length'])
+    # plot_results_multiple(predictions, y_test, configs['data']['sequence_length'])
+    plot_results(predictions, y_test)
 
 
 if __name__ == '__main__':

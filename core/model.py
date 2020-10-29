@@ -82,7 +82,6 @@ class Model():
 			callbacks=callbacks,
 			workers=1
 		)
-		
 		print('[Model] Training Completed. Model saved as %s' % save_fname)
 		timer.stop()
 

@@ -39,8 +39,10 @@ class DataLoader():
         '''
         data_x = []
         data_y = []
+        # print(range(self.len_train - seq_len))
         for i in range(self.len_train - seq_len):
             x, y = self._next_window(i, seq_len, normalise)
+            # print(x,y)
             data_x.append(x)
             data_y.append(y)
         return np.array(data_x), np.array(data_y)
