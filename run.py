@@ -4,6 +4,8 @@ __version__ = "2.0.0"
 __license__ = "MIT"
 
 import os
+
+from numpy.core.fromnumeric import ptp
 os.environ["CUDA_VISIBLE_DEVICES"] = "-1"
 import json
 import time
@@ -80,9 +82,11 @@ def main():
     )
     
     # predictions = model.predict_sequences_multiple(x_test, configs['data']['sequence_length'], configs['data']['sequence_length'])
-    predictions=model.predict_sequence_full(x_test,configs['data']['sequence_length'])
+    # predictions=model.predict_sequence_full(x_test,configs['data']['sequence_length'])
     # plot_results_multiple(predictions, y_test, configs['data']['sequence_length'])
-    plot_results(predictions, y_test)
+    # plot_results(predictions, y_test)
+    predictions_pointbypoint = model.predict_point_by_point(x_test)
+    plot_results(predictions_pointbypoint, y_test)
 
 
 if __name__ == '__main__':

@@ -66,10 +66,12 @@ class DataLoader():
 
     def _next_window(self, i, seq_len, normalise):
         '''Generates the next data window from the given index location i'''
+        # print(i,seq_len)
         window = self.data_train[i:i+seq_len]
         window = self.normalise_windows(window, single_window=True)[0] if normalise else window
         x = window[:-1]
         y = window[-1, [0]]
+   
         return x, y
 
     def normalise_windows(self, window_data, single_window=False):
