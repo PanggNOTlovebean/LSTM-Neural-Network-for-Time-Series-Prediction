@@ -61,6 +61,7 @@ def main():
     print(output)
 
     # 模型预测
+    # timeseries和y有问题    https://www.jianshu.com/p/4130bac8ebec
     arma_model = sm.tsa.ARMA(y,(p,d,q)).fit(disp=-1,maxiter=100)
     predict_data = arma_model.predict(start=str(1979), end=str(2010+3), dynamic = False)
     plt.plot(x,y)
