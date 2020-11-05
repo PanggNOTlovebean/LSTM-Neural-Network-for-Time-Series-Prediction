@@ -51,7 +51,7 @@ def main():
         seq_len=configs['data']['sequence_length'],
         normalise=configs['data']['normalise']
     )
-
+    print(len(x))
     '''
 	# in-memory training
 	model.train(
@@ -75,7 +75,7 @@ def main():
         steps_per_epoch=steps_per_epoch,
         save_dir=configs['model']['save_dir']
     )
-
+    
     x_test, y_test = data.get_test_data(
         seq_len=configs['data']['sequence_length'],
         normalise=configs['data']['normalise']

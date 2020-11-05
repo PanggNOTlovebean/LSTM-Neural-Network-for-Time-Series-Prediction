@@ -44,6 +44,7 @@ def main():
     prac = pacf(y,method='ywmle')
     table_data = np.c_[range(1,len(r)), r[1:],rac,prac[1:len(rac)+1],Q]
     table = pd.DataFrame(table_data, columns=['lag', "AC","Q", "PAC", "Prob(>Q)"])
+    print(table)
     # 确定p d q 
     p,d,q = (4,1,1)
     d=1
@@ -51,8 +52,22 @@ def main():
     summary = (arma_mod.summary2(alpha=.05, float_format="%.8f"))
     print(summary)
     print(len(y))
+
+
+
+
+    data=pd.read_csv('data/shangzhengtest.csv')
+    data=data.set_index('Date')
+
+    data=data.drop(['code','pctChg','Volume'],axis=1)
+    x=data.index.values
+    x= [datetime.datetime.strptime(d, '%Y-%m-%d') for d in x] 
+    y=data['Close'].values
+    # print(x,y)
+
+
     z=arma_mod.predict(start=0,end=len(y)-1)
-    print(z)
+    # print(z)
     
     y=data['Close'].values
     plt.plot(x[1:],y[1:])
